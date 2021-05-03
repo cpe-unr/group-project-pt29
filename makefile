@@ -1,4 +1,8 @@
-projectassignment: main.cpp noisegate.o processor.o echo.o normalizer.o
+projectassignment: main.cpp noisegate.o processor.o echo.o normalizer.o wav.o
+
+
+wav.o: wav.cpp Wav.h
+	g++ -c -std=c++11 wav.cpp
 
 noisegate.o: noisegate.cpp noisegate.h
 	g++ -c -std=c++11 noisegate.cpp
