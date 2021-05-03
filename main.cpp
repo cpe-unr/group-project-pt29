@@ -71,7 +71,6 @@ int main(int argc, char* argv[])
         int8_t* buffer = new int8_t[BUFFER_SIZE];
         while ((bytesRead = fread(buffer, sizeof buffer[0], BUFFER_SIZE / (sizeof buffer[0]), wavFile)) > 0)
         {
-            /** DO SOMETHING WITH THE WAVE DATA HERE **/
             cout << "Read " << bytesRead << " bytes." << endl;
         }
         delete [] buffer;

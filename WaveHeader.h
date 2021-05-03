@@ -1,43 +1,113 @@
-#ifndef WAVEHEADER_H
-#define WAVEHEADER_H
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <cstdint>
 
-// This header copied from https://gist.github.com/Jon-Schneider/8b7c53d27a7a13346a643dac9c19d34f
-/*
- * https://docs.fileformat.com/audio/wav/
- * Positions	Sample Value	Description
-1 - 4	“RIFF”	Marks the file as a riff file. Characters are each 1 byte long.
-5 - 8	File size (integer)	Size of the overall file - 8 bytes, in bytes (32-bit integer). Typically, you’d fill this in after creation.
-9 -12	“WAVE”	File Type Header. For our purposes, it always equals “WAVE”.
-13-16	“fmt "	Format chunk marker. Includes trailing null
-17-20	16	Length of format data as listed above
-21-22	1	Type of format (1 is PCM) - 2 byte integer
-23-24	2	Number of Channels - 2 byte integer
-25-28	44100	Sample Rate - 32 byte integer. Common values are 44100 (CD), 48000 (DAT). Sample Rate = Number of Samples per second, or Hertz.
-29-32	176400	(Sample Rate * BitsPerSample * Channels) / 8.
-33-34	4	(BitsPerSample * Channels) / 8.1 - 8 bit mono2 - 8 bit stereo/16 bit mono4 - 16 bit stereo
-35-36	16	Bits per sample
-37-40	“data”	“data” chunk header. Marks the beginning of the data section.
-41-44	File size (data)	Size of the data section.
- */
-typedef struct wav_header {
-    // RIFF Header
-    char riff_header[4]; // Contains "RIFF"
-    int wav_size; // Size of the wav portion of the file, which follows the first 8 bytes. File size - 8
-    char wave_header[4]; // Contains "WAVE"
+using std::cin;
+using std::cout;
+using std::endl;
+using std::fstream;
+using std::string;
 
-    // Format Header
-    char fmt_header[4]; // Contains "fmt " (includes trailing space)
-    int fmt_chunk_size; // Should be 16 for PCM
-    short audio_format; // Should be 1 for PCM. 3 for IEEE Float
-    short num_channels;
-    int sample_rate;
-    int byte_rate; // Number of bytes per second. sample_rate * num_channels * Bytes Per Sample
-    short sample_alignment; // num_channels * Bytes Per Sample
-    short bit_depth; // Number of bits per sample
+typedef struct  WAV_HEADER
+{
+    /* RIFF Chunk Descriptor */
+    uint8_t         RIFF[4];        // RIFF Header Magic header
+    uint32_t        ChunkSize;      // RIFF Chunk Size
+    uint8_t         WAVE[4];        // WAVE Header
+    /* "fmt" sub-chunk */
+    uint8_t         fmt[4];         // FMT header
+    uint32_t        Subchunk1Size;  // Size of the fmt chunk
+    uint16_t        AudioFormat;    // Audio format 1=PCM,6=mulaw,7=alaw,     257=IBM Mu-Law, 258=IBM A-Law, 259=ADPCM
+    uint16_t        NumOfChan;      // Number of channels 1=Mono 2=Sterio
+    uint32_t        SamplesPerSec;  // Sampling Frequency in Hz
+    uint32_t        bytesPerSec;    // bytes per second
+    uint16_t        blockAlign;     // 2=16-bit mono, 4=16-bit stereo
+    uint16_t        bitsPerSample;  // Number of bits per sample
+    /* "data" sub-chunk */
+    uint8_t         Subchunk2ID[4]; // "data"  string
+    uint32_t        Subchunk2Size;  // Sampled data length
+} wav_hdr;
 
-    // Data
-    char data_header[4]; // Contains "data"
-    int data_bytes; // Number of bytes in data. Number of samples * num_channels * sample byte size
-    // char bytes[]; // Remainder of wave file is bytes
-} wav_header;
-#endif
+// Function prototypes
+int getFileSize(FILE* inFile);
+
+int main(int argc, char* argv[])
+{
+    wav_hdr wavHeader;
+    int headerSize = sizeof(wav_hdr), filelength = 0;
+
+    const char* filePath;
+    string input;
+    if (argc <= 1)
+    {
+        cout << "Input wave file name: ";
+        cin >> input;
+        cin.get();
+        filePath = input.c_str();
+    }
+    else
+    {
+        filePath = argv[1];
+        cout << "Input wave file name: " << filePath << endl;
+    }
+
+    FILE* wavFile = fopen(filePath, "r");
+    if (wavFile == nullptr)
+    {
+        fprintf(stderr, "Unable to open wave file: %s\n", filePath);
+        return 1;
+    }
+
+    //Read the header
+    size_t bytesRead = fread(&wavHeader, 1, headerSize, wavFile);
+    cout << "Header Read " << bytesRead << " bytes." << endl;
+    if (bytesRead > 0)
+    {
+        //Read the data
+        uint16_t bytesPerSample = wavHeader.bitsPerSample / 8;      //Number     of bytes per sample
+        uint64_t numSamples = wavHeader.ChunkSize / bytesPerSample; //How many samples are in the wav file?
+        static const uint16_t BUFFER_SIZE = 4096;
+        int8_t* buffer = new int8_t[BUFFER_SIZE];
+        while ((bytesRead = fread(buffer, sizeof buffer[0], BUFFER_SIZE / (sizeof buffer[0]), wavFile)) > 0)
+        {
+            /** DO SOMETHING WITH THE WAVE DATA HERE **/
+            cout << "Read " << bytesRead << " bytes." << endl;
+        }
+        delete [] buffer;
+        buffer = nullptr;
+        filelength = getFileSize(wavFile);
+
+        cout << "File is                    :" << filelength << " bytes." << endl;
+        cout << "RIFF header                :" << wavHeader.RIFF[0] << wavHeader.RIFF[1] << wavHeader.RIFF[2] << wavHeader.RIFF[3] << endl;
+        cout << "WAVE header                :" << wavHeader.WAVE[0] << wavHeader.WAVE[1] << wavHeader.WAVE[2] << wavHeader.WAVE[3] << endl;
+        cout << "FMT                        :" << wavHeader.fmt[0] << wavHeader.fmt[1] << wavHeader.fmt[2] << wavHeader.fmt[3] << endl;
+        cout << "Data size                  :" << wavHeader.ChunkSize << endl;
+
+        // Display the sampling Rate from the header
+        cout << "Sampling Rate              :" << wavHeader.SamplesPerSec << endl;
+        cout << "Number of bits used        :" << wavHeader.bitsPerSample << endl;
+        cout << "Number of channels         :" << wavHeader.NumOfChan << endl;
+        cout << "Number of bytes per second :" << wavHeader.bytesPerSec << endl;
+        cout << "Data length                :" << wavHeader.Subchunk2Size << endl;
+        cout << "Audio Format               :" << wavHeader.AudioFormat << endl;
+        // Audio format 1=PCM,6=mulaw,7=alaw, 257=IBM Mu-Law, 258=IBM A-Law, 259=ADPCM
+
+        cout << "Block align                :" << wavHeader.blockAlign << endl;
+        cout << "Data string                :" << wavHeader.Subchunk2ID[0] << wavHeader.Subchunk2ID[1] << wavHeader.Subchunk2ID[2] << wavHeader.Subchunk2ID[3] << endl;
+    }
+    fclose(wavFile);
+    return 0;
+}
+
+// find the file size
+int getFileSize(FILE* inFile)
+{
+    int fileSize = 0;
+    fseek(inFile, 0, SEEK_END);
+
+    fileSize = ftell(inFile);
+
+    fseek(inFile, 0, SEEK_SET);
+    return fileSize;
+}
