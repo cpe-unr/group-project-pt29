@@ -53,6 +53,8 @@ int main(int argc, char* argv[])
         uint64_t numSamples = wavHeader.ChunkSize / bytesPerSample; //How many samples are in the wav file?
         static const uint16_t BUFFER_SIZE = 4096;
         int8_t* buffer = new int8_t[BUFFER_SIZE];
+
+
         while ((bytesRead = fread(buffer, sizeof buffer[0], BUFFER_SIZE / (sizeof buffer[0]), wavFile)) > 0)
         {
             cout << "Read " << bytesRead << " bytes." << endl;
@@ -60,6 +62,9 @@ int main(int argc, char* argv[])
         delete [] buffer;
         buffer = nullptr;
         filelength = getFileSize(wavFile);
+
+		char INFO[4];
+	fread(INFO, sizeof(INFO), 1, wavFile);
 
         cout << "File is                    :" << filelength << " bytes." << endl;
         cout << "RIFF header                :" << wavHeader.RIFF[0] << wavHeader.RIFF[1] << wavHeader.RIFF[2] << wavHeader.RIFF[3] << endl;
