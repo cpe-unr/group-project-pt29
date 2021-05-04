@@ -30,7 +30,7 @@ typedef struct  WAV_HEADER
 } wav_hdr;
 
 // Function prototypes
-int getFileSize(FILE* inFile);
+//int getFileSize(FILE* inFile);
 
 // find the file size
 int getFileSize(FILE* inFile)

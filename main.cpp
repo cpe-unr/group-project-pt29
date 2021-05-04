@@ -3,9 +3,17 @@
 #include <fstream>
 #include <cstdint>
 #include "WaveHeader.h"
+#include "dirent.h"
+#include <experimental/filesystem>
+
 
 int main(int argc, char* argv[])
 {
+
+	std::string path = "Waves";
+    for (const auto & entry : std::experimental::filesystem::directory_iterator(path))
+        std::cout << entry.path() << std::endl;
+
     wav_hdr wavHeader;
     int headerSize = sizeof(wav_hdr), filelength = 0;
 
