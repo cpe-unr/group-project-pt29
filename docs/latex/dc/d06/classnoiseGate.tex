@@ -1,0 +1,80 @@
+\hypertarget{classnoiseGate}{}\section{noise\+Gate Class Reference}
+\label{classnoiseGate}\index{noise\+Gate@{noise\+Gate}}
+
+
+Inheritance diagram for noise\+Gate\+:
+% FIG 0
+
+
+Collaboration diagram for noise\+Gate\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classnoiseGate_ad51202e67e851f04029a0d78e10ae8d8}{noise\+Gate} ()
+\item 
+\hyperlink{classnoiseGate_ac4db3916ae2c89dea6e14f0bce446170}{noise\+Gate} (float)
+\item 
+void \hyperlink{classnoiseGate_a2d58154fafa037e4c9512284e0431eed}{threshold\+Value} (unsigned char $\ast$, int)
+\item 
+void \hyperlink{classnoiseGate_a80aba98941fd95442fa3961b370fad35}{process\+Buffer} (unsigned char $\ast$buffer, int buffer\+Size)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classnoiseGate_ad51202e67e851f04029a0d78e10ae8d8}\label{classnoiseGate_ad51202e67e851f04029a0d78e10ae8d8}} 
+\index{noise\+Gate@{noise\+Gate}!noise\+Gate@{noise\+Gate}}
+\index{noise\+Gate@{noise\+Gate}!noise\+Gate@{noise\+Gate}}
+\subsubsection{\texorpdfstring{noise\+Gate()}{noiseGate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily noise\+Gate\+::noise\+Gate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor \mbox{\Hypertarget{classnoiseGate_ac4db3916ae2c89dea6e14f0bce446170}\label{classnoiseGate_ac4db3916ae2c89dea6e14f0bce446170}} 
+\index{noise\+Gate@{noise\+Gate}!noise\+Gate@{noise\+Gate}}
+\index{noise\+Gate@{noise\+Gate}!noise\+Gate@{noise\+Gate}}
+\subsubsection{\texorpdfstring{noise\+Gate()}{noiseGate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily noise\+Gate\+::noise\+Gate (\begin{DoxyParamCaption}\item[{float}]{new\+Thresh\+Val }\end{DoxyParamCaption})}
+
+Parameterized Constrcutor 
+\begin{DoxyParams}{Parameters}
+{\em float} & -\/ Noisegate threshold valuue \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classnoiseGate_a80aba98941fd95442fa3961b370fad35}\label{classnoiseGate_a80aba98941fd95442fa3961b370fad35}} 
+\index{noise\+Gate@{noise\+Gate}!process\+Buffer@{process\+Buffer}}
+\index{process\+Buffer@{process\+Buffer}!noise\+Gate@{noise\+Gate}}
+\subsubsection{\texorpdfstring{process\+Buffer()}{processBuffer()}}
+{\footnotesize\ttfamily void noise\+Gate\+::process\+Buffer (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{buffer,  }\item[{int}]{buffer\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Processes the buffer through the noisegate function 
+\begin{DoxyParams}{Parameters}
+{\em buffer} & -\/ this is where the buffer passes through \\
+\hline
+{\em buffer\+Size} & -\/ The size of the buffer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classProcessor_a401e57b59e43de9c4a51ca0f566d2948}{Processor}.
+
+\mbox{\Hypertarget{classnoiseGate_a2d58154fafa037e4c9512284e0431eed}\label{classnoiseGate_a2d58154fafa037e4c9512284e0431eed}} 
+\index{noise\+Gate@{noise\+Gate}!threshold\+Value@{threshold\+Value}}
+\index{threshold\+Value@{threshold\+Value}!noise\+Gate@{noise\+Gate}}
+\subsubsection{\texorpdfstring{threshold\+Value()}{thresholdValue()}}
+{\footnotesize\ttfamily void noise\+Gate\+::threshold\+Value (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{buffer,  }\item[{int}]{buffer\+Size }\end{DoxyParamCaption})}
+
+Creates the noisegate threshold value. 
+\begin{DoxyParams}{Parameters}
+{\em unsigned} & char -\/ will pass buffer through here \\
+\hline
+{\em int} & -\/ size of the buffer \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+noisegate.\+h\item 
+noisegate.\+cpp\end{DoxyCompactItemize}

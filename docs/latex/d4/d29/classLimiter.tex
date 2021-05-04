@@ -1,0 +1,56 @@
+\hypertarget{classLimiter}{}\section{Limiter Class Reference}
+\label{classLimiter}\index{Limiter@{Limiter}}
+
+
+Inheritance diagram for Limiter\+:
+% FIG 0
+
+
+Collaboration diagram for Limiter\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLimiter_a3fcc37e0ac0d7eb6ea9ce45fc8d78e99}{limit\+Func} (unsigned char $\ast$, int)
+\item 
+void \hyperlink{classLimiter_a226a4a5c3890a5dfbe35220595c3df2b}{process\+Buffer} (unsigned char $\ast$buffer, int buffer\+Size)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classLimiter_a3fcc37e0ac0d7eb6ea9ce45fc8d78e99}\label{classLimiter_a3fcc37e0ac0d7eb6ea9ce45fc8d78e99}} 
+\index{Limiter@{Limiter}!limit\+Func@{limit\+Func}}
+\index{limit\+Func@{limit\+Func}!Limiter@{Limiter}}
+\subsubsection{\texorpdfstring{limit\+Func()}{limitFunc()}}
+{\footnotesize\ttfamily void Limiter\+::limit\+Func (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{buffer,  }\item[{int}]{buffer\+Size }\end{DoxyParamCaption})}
+
+Creates the Limit/normalize Function 
+\begin{DoxyParams}{Parameters}
+{\em unsigned} & char -\/ will pass buffer through here \\
+\hline
+{\em int} & -\/ size of the buffer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLimiter_a226a4a5c3890a5dfbe35220595c3df2b}\label{classLimiter_a226a4a5c3890a5dfbe35220595c3df2b}} 
+\index{Limiter@{Limiter}!process\+Buffer@{process\+Buffer}}
+\index{process\+Buffer@{process\+Buffer}!Limiter@{Limiter}}
+\subsubsection{\texorpdfstring{process\+Buffer()}{processBuffer()}}
+{\footnotesize\ttfamily void Limiter\+::process\+Buffer (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{buffer,  }\item[{int}]{buffer\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Processes the buffer through the Limiter/normalizer function 
+\begin{DoxyParams}{Parameters}
+{\em buffer} & -\/ this is where the buffer passes through \\
+\hline
+{\em buffer\+Size} & -\/ The size of the buffer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classProcessor_a401e57b59e43de9c4a51ca0f566d2948}{Processor}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+normalizer.\+h\item 
+normalizer.\+cpp\end{DoxyCompactItemize}
