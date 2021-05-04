@@ -27,6 +27,7 @@ typedef struct  WAV_HEADER
     /* "data" sub-chunk */
     uint8_t         Subchunk2ID[4]; // "data"  string
     uint32_t        Subchunk2Size;  // Sampled data length
+
 } wav_hdr;
 
 // Function prototypes
