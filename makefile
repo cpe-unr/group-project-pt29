@@ -1,5 +1,5 @@
-projectassignment: main.cpp noisegate.o processor.o echo.o normalizer.o wav.o WaveHeader.h
-	g++ -std=c++17 main.cpp noisegate.o processor.o echo.o normalizer.o wav.o WaveHeader.h -o projectassignment -lstdc++fs
+projectassignment: main.cpp noisegate.o processor.o echo.o normalizer.o WaveHeader.h
+	g++ -std=c++17 main.cpp noisegate.o processor.o echo.o normalizer.o WaveHeader.h -o projectassignment -lstdc++fs
 
 
 wav.o: wav.cpp Wav.h
