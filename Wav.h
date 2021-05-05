@@ -6,7 +6,16 @@
 
 class Wav {
 public:
+	/**
+	* Reads 8 bit mono files only 
+	* @param fileName - This is the Wav file that ends up being read.
+	*/
     void read8BitMonoFile(const std::string &fileName);
+
+	/**
+	* Writes 8 bit mono files only 
+	* @param fileName - This is the Wav file that ends up being written.
+	*/
     void write8BitMonoFile(const std::string &outFileName);
 private:
     unsigned char* buffer = NULL;

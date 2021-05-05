@@ -1,7 +1,14 @@
-#ifndef METADATAHEADER_H
-#define METADATAHEADER_H
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <cstdint>
 
-typedef struct metadata_header{
+	/** 
+	* Establishes the data structure for metadata
+	*/
+
+typedef struct METADATA_HEADER
+{
 	public:
 		char LIST_H[4];
 
@@ -10,4 +17,4 @@ typedef struct metadata_header{
 		char INFO_H[4];
 }; metadata_header;
 
-#endif
+

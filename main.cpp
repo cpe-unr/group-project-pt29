@@ -1,3 +1,5 @@
+/** @file */
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -6,6 +8,14 @@
 #include "dirent.h"
 #include <experimental/filesystem>
 
+
+	/**
+	* Main application entry point
+	* Reads through the Directory and lists files.
+	* Prompts user for file
+	* Reads file
+	* Displays technical data
+	*/
 
 int main(int argc, char* argv[])
 {

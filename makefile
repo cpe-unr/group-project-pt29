@@ -17,4 +17,3 @@ echo.o: echo.cpp echo.h
 normalizer.o: normalizer.cpp normalizer.h
 	g++ -c -std=c++17 normalizer.cpp -lstdc++fs 
 
-

@@ -9,6 +9,9 @@ using std::endl;
 using std::fstream;
 using std::string;
 
+	/**
+	*This structure is used for the processing of technical data for Wav Files
+	*/
 typedef struct  WAV_HEADER
 {
     /* RIFF Chunk Descriptor */
